@@ -110,4 +110,50 @@ class AnuncioController extends Controller
 
         return response()->json(['message' => 'Anuncio eliminado correctamente']);
     }
+
+    /**
+     * Mostrar las publicaciones del usuario autenticado
+     */
+    public function misPublicaciones(Request $request)
+    {
+        $query = Anuncio::with('categoria')
+            ->where('user_id', auth()->id())
+            ->filter($request->only(['tipo_operacion', 'categoria_id', 'estado']));
+
+        $anuncios = $request->wantsJson() ? $query->get() : $query->paginate(20);
+        $categorias = Categoria::all();
+
+        if ($request->wantsJson()) {
+            return response()->json($anuncios);
+        }
+
+        return view('market', [
+            'anuncios' => $anuncios,
+            'categorias' => $categorias,
+            'misPublicaciones' => true
+        ]);
+    }
+
+    /**
+     * Mostrar publicaciones de otros usuarios
+     */
+    public function comunidad(Request $request)
+    {
+        $query = Anuncio::with('categoria')
+            ->where('user_id', '!=', auth()->id())
+            ->filter($request->only(['tipo_operacion', 'categoria_id', 'estado']));
+
+        $anuncios = $request->wantsJson() ? $query->get() : $query->paginate(20);
+        $categorias = Categoria::all();
+
+        if ($request->wantsJson()) {
+            return response()->json($anuncios);
+        }
+
+        return view('market', [
+            'anuncios' => $anuncios,
+            'categorias' => $categorias,
+            'misPublicaciones' => false
+        ]);
+    }
 }

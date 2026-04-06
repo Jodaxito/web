@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Message extends Model
 {
+    protected $table = 'j2_messages';
+
     protected $fillable = [
         'sender_id',
         'receiver_id',

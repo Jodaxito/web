@@ -7,6 +7,8 @@ use App\Models\AnuncioImagen;
 
 class Anuncio extends Model
 {
+    protected $table = 'j2_anuncios';
+
     protected $fillable = [
         'user_id',
         'titulo',

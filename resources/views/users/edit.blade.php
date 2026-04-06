@@ -19,7 +19,7 @@
                             <img src="{{ asset('storage/' . auth()->user()->foto_perfil) }}" 
                                 alt="Foto perfil" style="width: 100%; height: 100%; object-fit: cover;">
                         @else
-                            <span style="font-size: 2rem;">👤</span>
+                            <span style="font-size: 2rem;"></span>
                         @endif
                     </div>
                     <div>

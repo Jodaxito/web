@@ -8,11 +8,11 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('messages', function (Blueprint $table) {
+        Schema::create('j2_messages', function (Blueprint $table) {
             $table->id();
             $table->foreignId('sender_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('receiver_id')->constrained('users')->onDelete('cascade');
-            $table->foreignId('anuncio_id')->nullable()->constrained('anuncios')->onDelete('set null');
+            $table->foreignId('anuncio_id')->nullable()->constrained('j2_anuncios')->onDelete('set null');
             $table->text('contenido');
             $table->timestamp('leido_at')->nullable();
             $table->timestamps();
@@ -21,6 +21,6 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::dropIfExists('messages');
+        Schema::dropIfExists('j2_messages');
     }
 };

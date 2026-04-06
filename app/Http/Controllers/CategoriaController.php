@@ -9,46 +9,54 @@ class CategoriaController extends Controller
 {
     public function index()
     {
-        return response()->json(Categoria::all());
+        $categorias = Categoria::withCount('productos')->get();
+        return view('categorias.index', compact('categorias'));
     }
 
-    public function show(Categoria $categoria)
+    public function create()
     {
-        return response()->json($categoria);
+        return view('categorias.create');
     }
 
     public function store(Request $request)
     {
-        $data = $request->validate([
-            'nombre' => 'required|string|max:255|unique:categorias,nombre',
-            'descripcion' => 'nullable|string|max:255',
+        $validated = $request->validate([
+            'nombre' => 'required|string|max:100|unique:categorias,nombre',
+            'descripcion' => 'nullable|string',
         ]);
 
-        $categoria = Categoria::create($data);
+        Categoria::create($validated);
 
-        if ($request->wantsJson()) {
-            return response()->json($categoria, 201);
-        }
+        return redirect()->route('categorias.index')->with('success', 'Categoría creada correctamente');
+    }
 
-        return redirect('/market')->with('success', 'Categoría creada correctamente');
+    public function show(Categoria $categoria)
+    {
+        $categoria->load('productos');
+        return view('categorias.show', compact('categoria'));
+    }
+
+    public function edit(Categoria $categoria)
+    {
+        return view('categorias.edit', compact('categoria'));
     }
 
     public function update(Request $request, Categoria $categoria)
     {
-        $data = $request->validate([
-            'nombre' => 'sometimes|required|string|max:255|unique:categorias,nombre,' . $categoria->id,
-            'descripcion' => 'nullable|string|max:255',
+        $validated = $request->validate([
+            'nombre' => 'required|string|max:100|unique:categorias,nombre,'.$categoria->id.',id',
+            'descripcion' => 'nullable|string',
         ]);
 
-        $categoria->update($data);
+        $categoria->update($validated);
 
-        return response()->json($categoria);
+        return redirect()->route('categorias.index')->with('success', 'Categoría actualizada correctamente');
     }
 
     public function destroy(Categoria $categoria)
     {
         $categoria->delete();
 
-        return response()->json(['message' => 'Categoría eliminada correctamente']);
+        return redirect()->route('categorias.index')->with('success', 'Categoría eliminada correctamente');
     }
 }

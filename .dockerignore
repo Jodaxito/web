@@ -1,0 +1,47 @@
+# Archivos y directorios a excluir
+.git
+.gitignore
+.gitattributes
+README.md
+DESIGN_IMPROVEMENTS.md
+RAILWAY_SETUP.md
+
+# Archivos de desarrollo
+.env
+.env.example
+.phpunit.xml
+phpunit.xml
+
+# Dependencias no necesarias
+node_modules
+npm-debug.log
+yarn-error.log
+
+# Archivos de cache y logs
+storage/*.key
+storage/logs/*
+storage/framework/cache/*
+storage/framework/sessions/*
+storage/framework/views/*
+bootstrap/cache/*
+
+# IDE y editores
+.vscode
+.idea
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Docker
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# Tests
+tests
+phpunit.xml
+composer.lock

@@ -8,12 +8,12 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('reviews', function (Blueprint $table) {
+        Schema::create('j2_reviews', function (Blueprint $table) {
             $table->id();
             $table->foreignId('reviewer_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('reviewed_id')->constrained('users')->onDelete('cascade');
-            $table->foreignId('anuncio_id')->constrained('anuncios')->onDelete('cascade');
-            $table->integer('calificacion')->min(1)->max(5);
+            $table->foreignId('anuncio_id')->constrained('j2_anuncios')->onDelete('cascade');
+            $table->integer('calificacion');
             $table->text('comentario')->nullable();
             $table->timestamps();
             $table->unique(['reviewer_id', 'anuncio_id']);
@@ -22,6 +22,6 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::dropIfExists('reviews');
+        Schema::dropIfExists('j2_reviews');
     }
 };

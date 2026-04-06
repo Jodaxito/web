@@ -8,15 +8,15 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('anuncios', function (Blueprint $table) {
+        Schema::create('j2_anuncios', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('categoria_id')->nullable()->constrained('categorias')->nullOnDelete();
+            $table->foreignId('categoria_id')->nullable()->constrained('j2_categorias')->nullOnDelete();
             $table->string('titulo');
             $table->text('descripcion');
-            $table->enum('tipo_operacion', ['COMPRA', 'VENTA', 'INTERCAMBIO', 'DONACION']);
+            $table->string('tipo_operacion', 50);
             $table->decimal('precio', 10, 2)->nullable();
-            $table->enum('estado', ['DISPONIBLE', 'RESERVADO', 'CERRADO'])->default('DISPONIBLE');
+            $table->string('estado', 50)->default('DISPONIBLE');
             $table->string('ubicacion')->nullable();
             $table->timestamps();
         });
@@ -24,6 +24,6 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::dropIfExists('anuncios');
+        Schema::dropIfExists('j2_anuncios');
     }
 };

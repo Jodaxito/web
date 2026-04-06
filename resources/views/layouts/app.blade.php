@@ -571,6 +571,213 @@
             background: linear-gradient(180deg, var(--secondary) 0%, var(--primary) 100%);
         }
 
+        /* Notificaciones y badges mejorados */
+        .notification-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: linear-gradient(135deg, #f43f5e 0%, #e11d48 100%);
+            color: white;
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 0.2rem 0.4rem;
+            border-radius: 999px;
+            min-width: 18px;
+            text-align: center;
+        }
+
+        /* Dropdown mejorado */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .dropdown-toggle {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            padding: 0.5rem 1rem;
+            border-radius: 0.75rem;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .dropdown-toggle:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .dropdown-toggle svg {
+            transition: transform 0.3s ease;
+        }
+        
+        .dropdown:hover .dropdown-toggle svg {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: var(--card);
+            border: 2px solid var(--border);
+            border-radius: 1rem;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+            min-width: 220px;
+            z-index: 100;
+            animation: fadeIn 0.2s ease;
+            margin-top: 0.5rem;
+            padding: 0.5rem;
+        }
+
+        .dropdown:hover .dropdown-menu {
+            display: block;
+        }
+
+        .dropdown-menu a {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1rem;
+            color: var(--text-main);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-radius: 0.5rem;
+            font-weight: 500;
+        }
+
+        .dropdown-menu a:hover {
+            background: var(--primary-soft);
+            color: var(--primary-dark);
+            padding-left: 1.25rem;
+        }
+
+        .dropdown-menu a svg {
+            width: 18px;
+            height: 18px;
+            color: var(--text-muted);
+        }
+
+        .dropdown-menu a:hover svg {
+            color: var(--primary);
+        }
+
+        .dropdown-divider {
+            height: 1px;
+            background: var(--border);
+            margin: 0.5rem 0;
+        }
+
+        .dropdown-header {
+            padding: 0.75rem 1rem;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-weight: 700;
+        }
+
+        /* Animación para notificaciones toast */
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Estilos para botones de acción del header */
+        .header-action-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border-radius: 0.75rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: white;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .header-action-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .header-action-btn svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        /* Link de Favoritos en el menú */
+        .menu-link {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1rem;
+            color: var(--text-main);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-radius: 0.5rem;
+            font-weight: 500;
+        }
+
+        .menu-link:hover {
+            background: var(--primary-soft);
+            color: var(--primary-dark);
+        }
+
+        .menu-link svg {
+            width: 18px;
+            height: 18px;
+            color: var(--text-muted);
+        }
+
+        .menu-link:hover svg {
+            color: var(--primary);
+        }
+
+        .menu-link.danger {
+            color: #dc2626;
+        }
+
+        .menu-link.danger:hover {
+            background: #fee2e2;
+        }
+
+        .menu-link.danger svg {
+            color: #dc2626;
+        }
+
+        /* User avatar en header */
+        .header-user-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .header-user-avatar-placeholder {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #86efac 0%, #6ee7b7 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #065f46;
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
         /* Print styles */
         @media print {
             header, .panel, .cards-header { display: none; }
@@ -661,37 +868,126 @@
             </div>
         </a>
         <div class="header-links">
-            <a href="{{ route('about') }}">Acerca de</a>
+            <a href="{{ route('about') }}" class="header-action-btn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="12" y1="16" x2="12" y2="12"></line>
+                    <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                </svg>
+                Acerca de
+            </a>
             @auth
-                <div class="user-info">
-                    <span>{{ auth()->user()->name }}</span>
-                </div>
+                <a href="{{ route('favorites.index') }}" class="header-action-btn" style="position: relative;">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                    </svg>
+                    Favoritos
+                    @if(auth()->user()->favoritos()->count() > 0)
+                        <span class="notification-badge">{{ auth()->user()->favoritos()->count() }}</span>
+                    @endif
+                </a>
+                <a href="{{ route('messages.index') }}" class="header-action-btn">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                    </svg>
+                    Mensajes
+                </a>
                 <div class="dropdown">
-                    <span class="dropdown-toggle">☰ Menú</span>
-                    <div class="dropdown-menu">
-                        <a href="{{ route('market.index') }}">Explorar</a>
-                        <a href="{{ route('market.create') }}">Publicar</a>
-                        <a href="{{ route('search') }}">Buscar</a>
-                        <hr style="margin: 0.25rem 0; border: none; border-top: 1px solid var(--border);">
-                        <a href="{{ route('messages.index') }}">Mensajes</a>
-                        <a href="{{ route('favorites.index') }}">Favoritos</a>
-                        <a href="{{ route('user.profile', auth()->user()) }}">Mi Perfil</a>
-                        <a href="{{ route('profile.edit') }}">Editar Perfil</a>
-                        @if(auth()->user()->is_admin)
-                            <hr style="margin: 0.25rem 0; border: none; border-top: 1px solid var(--border);">
-                            <a href="{{ route('report.admin') }}" style="color: #d32f2f;">Panel de Reportes</a>
+                    <span class="dropdown-toggle">
+                        @if(auth()->user()->foto_perfil)
+                            <img src="{{ asset('storage/' . auth()->user()->foto_perfil) }}" class="header-user-avatar" alt="{{ auth()->user()->name }}">
+                        @else
+                            <div class="header-user-avatar-placeholder">
+                                {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
+                            </div>
                         @endif
+                        {{ auth()->user()->name }}
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </span>
+                    <div class="dropdown-menu">
+                        <div class="dropdown-header">Cuenta</div>
+                        <a href="{{ route('market.index') }}" class="menu-link">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                                <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                            </svg>
+                            Inicio
+                        </a>
+                        <a href="{{ route('market.create') }}" class="menu-link">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="12" y1="5" x2="12" y2="19"></line>
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                            </svg>
+                            Nueva Publicación
+                        </a>
+                        <a href="{{ route('search') }}" class="menu-link">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="11" cy="11" r="8"></circle>
+                                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                            </svg>
+                            Buscar
+                        </a>
+                        
+                        <div class="dropdown-divider"></div>
+                        <div class="dropdown-header">Mi Perfil</div>
+                        <a href="{{ route('user.profile', auth()->user()) }}" class="menu-link">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                            </svg>
+                            Ver Perfil
+                        </a>
+                        <a href="{{ route('profile.edit') }}" class="menu-link">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                            </svg>
+                            Editar Perfil
+                        </a>
+                        <a href="{{ route('favorites.index') }}" class="menu-link">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                            </svg>
+                            Mis Favoritos
+                        </a>
+                        
+                        @if(auth()->user()->is_admin)
+                            <div class="dropdown-divider"></div>
+                            <div class="dropdown-header">Administración</div>
+                            <a href="{{ route('report.admin') }}" class="menu-link danger">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+                                    <line x1="12" y1="9" x2="12" y2="13"></line>
+                                    <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                                </svg>
+                                Panel de Reportes
+                            </a>
+                        @endif
+                        
+                        <div class="dropdown-divider"></div>
+                        <form action="{{ route('auth.logout') }}" method="POST">
+                            @csrf
+                            <button type="submit" class="menu-link danger" style="width: 100%; border: none; background: none; cursor: pointer; text-align: left;">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                                    <polyline points="16 17 21 12 16 7"></polyline>
+                                    <line x1="21" y1="12" x2="9" y2="12"></line>
+                                </svg>
+                                Cerrar Sesión
+                            </button>
+                        </form>
                     </div>
                 </div>
-                <form action="{{ route('auth.logout') }}" method="POST" style="display:inline;">
-                    @csrf
-                    <button type="submit" class="btn-logout">Cerrar sesión</button>
-                </form>
             @else
-                <a href="{{ route('auth.login') }}">Iniciar Sesión</a>
-                <a href="{{ route('auth.register') }}">Registrarse</a>
+                <a href="{{ route('auth.login') }}" class="btn-outline" style="background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.3); color: white;">
+                    Iniciar Sesión
+                </a>
+                <a href="{{ route('auth.register') }}" class="btn-primary">
+                    Registrarse
+                </a>
             @endauth
-        </div>
         </div>
     </div>
 </header>

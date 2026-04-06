@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Favorite extends Model
 {
+    protected $table = 'j2_favorites';
+
     protected $fillable = [
         'user_id',
         'anuncio_id'

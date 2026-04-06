@@ -8,7 +8,7 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('categorias', function (Blueprint $table) {
+        Schema::create('j2_categorias', function (Blueprint $table) {
             $table->id();
             $table->string('nombre')->unique();
             $table->string('descripcion')->nullable();
@@ -18,6 +18,6 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::dropIfExists('categorias');
+        Schema::dropIfExists('j2_categorias');
     }
 };

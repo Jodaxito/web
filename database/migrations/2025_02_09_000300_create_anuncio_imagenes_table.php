@@ -8,9 +8,9 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('anuncio_imagenes', function (Blueprint $table) {
+        Schema::create('j2_anuncio_imagenes', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('anuncio_id')->constrained('anuncios')->cascadeOnDelete();
+            $table->foreignId('anuncio_id')->constrained('j2_anuncios')->cascadeOnDelete();
             $table->string('url');
             $table->timestamps();
         });
@@ -18,6 +18,6 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::dropIfExists('anuncio_imagenes');
+        Schema::dropIfExists('j2_anuncio_imagenes');
     }
 };

@@ -1,37 +1,19 @@
-PFROM php:8.2-fpm
+FROM php:8.2-cli
 
-WORKDIR /app
-
-# Instalar dependencias
 RUN apt-get update && apt-get install -y \
-    curl \
-    git \
-    unzip \
-    libpq-dev \
-    libzip-dev \
-    && docker-php-ext-install pdo pdo_pgsql zip \
-    && rm -rf /var/lib/apt/lists/*
+    git unzip libpq-dev
 
-# Instalar Composer
+RUN docker-php-ext-install pdo pdo_pgsql
+
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Copiar proyecto
+WORKDIR /app
 COPY . .
 
-# Instalar dependencias PHP
 RUN composer install --no-dev --optimize-autoloader
 
-# Generrar key
-RUN php artisan key:generate --force
+RUN chmod -R 775 storage bootstrap/cache
 
-# Migrar BD
-RUN php artisan migrate --force --no-interaction || true
+EXPOSE 10000
 
-# Cache config
-RUN php artisan config:cache
-
-# Exponer puerto
-EXPOSE 8080
-
-# Comando de inicio
-CMD ["php", "-S", "0.0.0.0:8080", "-t", "public"]<<
+CMD php -S 0.0.0.0:10000 -t public

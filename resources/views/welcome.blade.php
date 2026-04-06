@@ -1,436 +1,210 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="es">
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
+    <title>JODAXI - Mercado Universitario</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>JODAXI - Marketplace Estudiantil</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" href="https://laravel.com/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        
-        :root {
-            --primary: #22c55e;
-            --primary-dark: #16a34a;
-            --secondary: #10b981;
-            --bg: #f0fdf4;
-            --text: #0f172a;
-            --text-muted: #64748b;
-        }
-        
         body {
-            font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            line-height: 1.6;
+            background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 100%);
+            color: #ffffff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        
-        /* Header */
-        header {
-            background: linear-gradient(135deg, #0f766e 0%, #065f46 50%, #047857 100%);
+        .hero-section {
+            background: linear-gradient(135deg, #e50914 0%, #b20710 100%);
             color: white;
-            padding: 1rem 1.5rem;
-            position: sticky;
-            top: 0;
-            z-index: 10;
-            box-shadow: 0 8px 24px rgba(34, 197, 94, 0.12);
-        }
-        
-        .header-inner {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 1.5rem;
-        }
-        
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            text-decoration: none;
-            color: white;
-            transition: transform 0.3s ease;
-        }
-        
-        .logo:hover { transform: translateY(-2px); }
-        
-        .logo-img {
-            width: 52px;
-            height: 52px;
-            border-radius: 0.5rem;
-            object-fit: contain;
-            filter: brightness(1.1);
-        }
-        
-        .logo-text h1 {
-            font-size: 1.5rem;
-            font-weight: 800;
-            letter-spacing: -0.02em;
-            background: linear-gradient(135deg, #86efac 0%, #6ee7b7 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin: 0;
-        }
-        
-        .logo-text p {
-            font-size: 0.7rem;
-            color: #a7f3d0;
-            font-weight: 500;
-            letter-spacing: 0.05em;
-            margin: 0;
-        }
-        
-        .header-links {
-            display: flex;
-            gap: 1.5rem;
-            align-items: center;
-        }
-        
-        .header-links a {
-            color: #a7f3d0;
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s ease;
-        }
-        
-        .header-links a:hover { color: white; }
-        
-        .btn-header {
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            padding: 0.6rem 1.2rem;
-            border-radius: 0.5rem;
-            text-decoration: none;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .btn-header:hover {
-            background: rgba(255, 255, 255, 0.3);
-            border-color: rgba(255, 255, 255, 0.5);
-        }
-        
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
-            padding: 4rem 1.5rem;
+            padding: 100px 0;
             text-align: center;
-            border-bottom: 3px solid var(--primary);
+            border-radius: 15px;
+            margin-bottom: 50px;
+            box-shadow: 0 10px 30px rgba(229, 9, 20, 0.3);
         }
-        
-        .hero-content {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        .hero h2 {
-            font-size: 3.5rem;
-            font-weight: 900;
-            line-height: 1.1;
-            margin-bottom: 1rem;
-            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--secondary) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .hero p {
-            font-size: 1.25rem;
-            color: var(--text-muted);
-            margin-bottom: 2rem;
-        }
-        
-        .btn-primary {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            color: white;
-            border: none;
-            padding: 1rem 2rem;
-            font-size: 1rem;
-            font-weight: 700;
-            border-radius: 0.75rem;
-            cursor: pointer;
-            text-decoration: none;
-            display: inline-block;
-            transition: all 0.3s ease;
-            box-shadow: 0 8px 20px rgba(34, 197, 94, 0.3);
-        }
-        
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 30px rgba(34, 197, 94, 0.4);
-        }
-        
-        .btn-secondary {
-            background: white;
-            color: var(--primary-dark);
-            border: 2px solid var(--primary);
-            padding: 0.9rem 1.9rem;
-            font-size: 1rem;
-            font-weight: 700;
-            border-radius: 0.75rem;
-            cursor: pointer;
-            text-decoration: none;
-            display: inline-block;
-            transition: all 0.3s ease;
-            margin-left: 1rem;
-        }
-        
-        .btn-secondary:hover {
-            background: var(--primary-soft);
-            transform: translateY(-3px);
-        }
-        
-        /* Features */
-        .features {
-            max-width: 1400px;
-            margin: 4rem auto;
-            padding: 0 1.5rem;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-        }
-        
         .feature-card {
-            background: white;
-            padding: 2rem;
-            border-radius: 1rem;
-            border: 2px solid #d1fae5;
-            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             transition: all 0.3s ease;
-            box-shadow: 0 4px 12px rgba(34, 197, 94, 0.08);
+            border-radius: 15px;
+            padding: 30px;
+            height: 100%;
         }
-        
         .feature-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 30px rgba(34, 197, 94, 0.15);
-            border-color: var(--primary);
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 15px 40px rgba(229, 9, 20, 0.4);
         }
-        
-        .feature-icon {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            margin: 0 auto 1rem;
+        .stats-card {
+            background: linear-gradient(135deg, #141414 0%, #2a2a2a 100%);
+            border-left: 4px solid #e50914;
+            border-radius: 15px;
         }
-        
-        .feature-card h3 {
-            font-size: 1.25rem;
-            margin-bottom: 0.75rem;
-            color: var(--primary-dark);
+        .btn-primary {
+            background: linear-gradient(135deg, #e50914 0%, #b20710 100%);
+            border: none;
+            padding: 12px 30px;
+            font-weight: 600;
+            border-radius: 25px;
+            transition: all 0.3s ease;
         }
-        
-        .feature-card p {
-            color: var(--text-muted);
-            line-height: 1.6;
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #ff0a16 0%, #c30810 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(229, 9, 20, 0.4);
         }
-        
-        /* Stats */
-        .stats {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            color: white;
-            padding: 3rem 1.5rem;
-            margin: 2rem 0;
+        .btn-success {
+            background: linear-gradient(135deg, #46d369 0%, #2ea043 100%);
+            border: none;
+            padding: 12px 30px;
+            font-weight: 600;
+            border-radius: 25px;
+            transition: all 0.3s ease;
         }
-        
-        .stats-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            text-align: center;
+        .btn-success:hover {
+            background: linear-gradient(135deg, #56e479 0%, #3eb053 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(70, 211, 105, 0.4);
         }
-        
-        .stat-item h4 {
-            font-size: 2.5rem;
-            font-weight: 900;
-            margin-bottom: 0.5rem;
+        .btn-warning {
+            background: linear-gradient(135deg, #f7b731 0%, #d68910 100%);
+            border: none;
+            padding: 12px 30px;
+            font-weight: 600;
+            border-radius: 25px;
+            transition: all 0.3s ease;
         }
-        
-        .stat-item p {
-            font-size: 1rem;
-            opacity: 0.95;
+        .btn-warning:hover {
+            background: linear-gradient(135deg, #ffc73c 0%, #e6a010 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(247, 183, 49, 0.4);
         }
-        
-        /* Call to Action */
-        .cta {
-            max-width: 800px;
-            margin: 4rem auto;
-            padding: 2rem;
-            text-align: center;
-            background: white;
-            border-radius: 1rem;
-            box-shadow: 0 8px 24px rgba(34, 197, 94, 0.12);
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
         }
-        
-        .cta h2 {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-            color: var(--primary-dark);
+        .card-header {
+            background: rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px 15px 0 0 !important;
         }
-        
-        .cta p {
-            color: var(--text-muted);
-            margin-bottom: 2rem;
-            font-size: 1.1rem;
+        .display-4 {
+            font-weight: 800;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         }
-        
-        /* Footer */
-        footer {
-            background: #0f766e;
-            color: #a7f3d0;
-            padding: 2rem 1.5rem;
-            text-align: center;
-            margin-top: 4rem;
+        .lead {
+            font-size: 1.5rem;
+            font-weight: 300;
         }
-        
-        footer p { margin: 0.5rem 0; }
-        
-        footer a {
-            color: #86efac;
-            text-decoration: none;
+        .text-muted {
+            color: rgba(255, 255, 255, 0.7) !important;
         }
-        
-        footer a:hover { color: white; }
-        
-        /* Responsive */
-        @media (max-width: 768px) {
-            .hero h2 { font-size: 2rem; }
-            .hero p { font-size: 1rem; }
-            .btn-secondary { margin-left: 0; margin-top: 0.5rem; }
-            .header-links { flex-direction: column; align-items: flex-start; }
+        .badge {
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+        .list-unstyled li {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            border-left: 3px solid #e50914;
+        }
+        .container {
+            max-width: 1200px;
         }
     </style>
 </head>
-<body>
-    <!-- Header -->
-    <header>
-        <div class="header-inner">
-            <a href="{{ route('market.index') }}" class="logo">
-                <img src="{{ asset('images/logo.jpeg') }}" alt="JODAXI Logo" class="logo-img">
-                <div class="logo-text">
-                    <h1>JODAXI</h1>
-                    <p>MARKETPLACE ESTUDIANTIL</p>
-                </div>
-            </a>
-            <div class="header-links">
-                <a href="#features">Características</a>
-                @auth
-                    <a href="{{ route('market.index') }}" class="btn-header">Explorar</a>
-                    <form method="POST" action="{{ route('logout') }}" style="display: inline;">
-                        @csrf
-                        <button type="submit" class="btn-header" style="cursor: pointer;">Cerrar Sesión</button>
-                    </form>
-                @else
-                    <a href="{{ route('login') }}" class="btn-header">Ingresar</a>
-                    <a href="{{ route('register') }}" class="btn-header" style="background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%); border: none;">Registrarse</a>
-                @endauth
-            </div>
+<body class="container mt-5">
+
+    <div class="hero-section">
+        <div class="container">
+            <h1 class="display-4 fw-bold">🎓 JODAXI</h1>
+            <p class="lead">Mercado Universitario de Productos</p>
+            <p class="mb-0 fs-5">Compra, vende, dona o intercambia productos universitarios</p>
         </div>
-    </header>
-    
-    <!-- Hero -->
-    <section class="hero">
-        <div class="hero-content">
-            <h2>Bienvenido a JODAXI</h2>
-            <p>La plataforma de compra, venta, intercambio y donación diseñada especialmente para la comunidad estudiantil</p>
-            @auth
-                <a href="{{ route('market.index') }}" class="btn-primary">Explorar Marketplace</a>
-                <a href="{{ route('market.create') }}" class="btn-secondary">Publicar Ahora</a>
-            @else
-                <a href="{{ route('register') }}" class="btn-primary">Comenzar Ahora</a>
-                <a href="{{ route('login') }}" class="btn-secondary">Iniciar Sesión</a>
-            @endauth
-        </div>
-    </section>
-    
-    <!-- Features -->
-    <section class="features" id="features">
-        <div class="feature-card">
-            <div class="feature-icon">🛍️</div>
-            <h3>Compra & Venta</h3>
-            <p>Encuentra productos a precios accesibles o vende tus artículos con facilidad a otros estudiantes</p>
-        </div>
-        
-        <div class="feature-card">
-            <div class="feature-icon">🔄</div>
-            <h3>Intercambio</h3>
-            <p>Intercambia artículos con otros estudiantes y consigue lo que necesitas sin gastar dinero</p>
-        </div>
-        
-        <div class="feature-card">
-            <div class="feature-icon">🎁</div>
-            <h3>Donaciones</h3>
-            <p>Dona artículos que ya no usas y ayuda a otros miembros de la comunidad</p>
-        </div>
-        
-        <div class="feature-card">
-            <div class="feature-icon">💬</div>
-            <h3>Comunicación Segura</h3>
-            <p>Mensajería integrada para negociar y cerrar tratos de forma segura</p>
-        </div>
-        
-        <div class="feature-card">
-            <div class="feature-icon">⭐</div>
-            <h3>Calificaciones</h3>
-            <p>Sistema de reseñas para construir confianza en la comunidad estudiantil</p>
-        </div>
-        
-        <div class="feature-card">
-            <div class="feature-icon">❤️</div>
-            <h3>Favoritos</h3>
-            <p>Guarda tus anuncios favoritos y recibe notificaciones de nuevas publicaciones</p>
-        </div>
-    </section>
-    
-    <!-- Stats -->
-    <section class="stats">
-        <div class="stats-content">
-            <div class="stat-item">
-                <h4>500+</h4>
-                <p>Usuarios Activos</p>
-            </div>
-            <div class="stat-item">
-                <h4>2000+</h4>
-                <p>Productos Listados</p>
-            </div>
-            <div class="stat-item">
-                <h4>100%</h4>
-                <p>Comunidad Segura</p>
-            </div>
-        </div>
-    </section>
-    
-    <!-- CTA -->
-    <div class="cta">
-        <h2>¿Listo para comenzar?</h2>
-        <p>Únete a miles de estudiantes que ya están comprando, vendiendo e intercambiando en JODAXI</p>
-        @guest
-            <a href="{{ route('register') }}" class="btn-primary">Crear Cuenta Ahora</a>
-        @else
-            <a href="{{ route('market.index') }}" class="btn-primary">Ver Marketplace</a>
-        @endguest
     </div>
-    
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2026 JODAXI - Marketplace Estudiantil</p>
-        <p>Diseñado con ❤️ para la comunidad estudiantil</p>
-        <p><a href="{{ route('about') }}">Acerca de Nosotros</a> | 
-        @auth
-            <a href="{{ route('user.profile', auth()->user()) }}">Mi Perfil</a> | 
-            <a href="{{ route('favorites.index') }}">Favoritos</a>
-        @endauth
-        </p>
-    </footer>
+
+    <div class="row mb-5">
+        <div class="col-md-3 mb-4">
+            <div class="feature-card h-100 text-center">
+                <i class="bi bi-box-seam display-4 text-danger mb-3"></i>
+                <h5 class="card-title fw-bold">Productos</h5>
+                <p class="card-text text-muted">Gestiona tu inventario de productos universitarios</p>
+                <a href="{{ route('productos.index') }}" class="btn btn-primary w-100">Ver Productos</a>
+            </div>
+        </div>
+        <div class="col-md-3 mb-4">
+            <div class="feature-card h-100 text-center">
+                <i class="bi bi-tags display-4 text-success mb-3"></i>
+                <h5 class="card-title fw-bold">Categorías</h5>
+                <p class="card-text text-muted">Organiza tus productos por categorías</p>
+                <a href="{{ route('categorias.index') }}" class="btn btn-success w-100">Ver Categorías</a>
+            </div>
+        </div>
+        <div class="col-md-3 mb-4">
+            <div class="feature-card h-100 text-center">
+                <i class="bi bi-arrow-left-right display-4 text-warning mb-3"></i>
+                <h5 class="card-title fw-bold">Transacciones</h5>
+                <p class="card-text text-muted">Historial completo de todas tus transacciones</p>
+                <a href="{{ route('transacciones.index') }}" class="btn btn-warning w-100">Ver Transacciones</a>
+            </div>
+        </div>
+        <div class="col-md-3 mb-4">
+            <div class="stats-card h-100">
+                <div class="card-body">
+                    <h6 class="card-subtitle mb-3 text-muted">Estadísticas Rápidas</h6>
+                    <div class="row text-center">
+                        <div class="col-6">
+                            <small class="text-muted">Productos</small>
+                            <h4 class="text-danger fw-bold">{{ App\Models\Producto::count() }}</h4>
+                        </div>
+                        <div class="col-6">
+                            <small class="text-muted">Transacciones</small>
+                            <h4 class="text-success fw-bold">0</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-5">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="fw-bold">🔥 Últimas Actividades</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6 class="fw-bold mb-4">Productos Recientes</h6>
+                            <ul class="list-unstyled">
+                                <li class="mb-3">
+                                    <strong>Sin productos aún</strong>
+                                    <small class="text-muted d-block mt-1">Crea tu primer producto</small>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h6 class="fw-bold mb-4">Transacciones Recientes</h6>
+                            <ul class="list-unstyled">
+                                <li class="mb-3">
+                                    <strong>Sin transacciones aún</strong>
+                                    <small class="text-muted d-block mt-1">Registra tu primera transacción</small>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

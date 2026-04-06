@@ -9,7 +9,7 @@ class AnuncioImagen extends Model
 {
     use HasFactory;
 
-    protected $table = 'anuncio_imagenes';
+    protected $table = 'j2_anuncio_imagenes';
 
     protected $fillable = [
         'anuncio_id',

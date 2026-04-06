@@ -5,7 +5,7 @@
 @section('content')
 @if(session('success'))
     <div style="grid-column: 1 / -1; background: #dcfce7; border-left: 4px solid #16a34a; padding: 1rem; border-radius: 0.4rem; margin-bottom: 1rem;">
-        <p style="margin: 0; color: #166534; font-weight: 500;">✓ {{ session('success') }}</p>
+        <p style="margin: 0; color: #166534; font-weight: 500;">{{ session('success') }}</p>
     </div>
 @endif
 
@@ -29,7 +29,7 @@
                 <h1 style="margin: 0 0 0.5rem 0;">{{ $user->name }}</h1>
                 
                 @if($user->verificado)
-                    <span class="badge" style="background: #dcfce7; color: #166534; display: inline-block; margin-bottom: 0.5rem;">✓ Verificado</span>
+                    <span class="badge" style="background: #dcfce7; color: #166534; display: inline-block; margin-bottom: 0.5rem;">Verificado</span>
                 @endif
 
                 <div style="display: flex; gap: 2rem; margin-bottom: 1rem; flex-wrap: wrap;">
@@ -48,7 +48,7 @@
                 @endif
 
                 @if($user->telefono)
-                    <p style="color: var(--text-muted); margin: 0.5rem 0;">📞 {{ $user->telefono }}</p>
+                    <p style="color: var(--text-muted); margin: 0.5rem 0;">{{ $user->telefono }}</p>
                 @endif
 
                 <!-- Acciones -->

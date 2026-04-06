@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Review extends Model
 {
+    protected $table = 'j2_reviews';
+
     protected $fillable = [
         'reviewer_id',
         'reviewed_id',

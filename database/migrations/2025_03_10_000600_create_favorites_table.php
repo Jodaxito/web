@@ -8,10 +8,10 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('favorites', function (Blueprint $table) {
+        Schema::create('j2_favorites', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            $table->foreignId('anuncio_id')->constrained('anuncios')->onDelete('cascade');
+            $table->foreignId('anuncio_id')->constrained('j2_anuncios')->onDelete('cascade');
             $table->timestamps();
             $table->unique(['user_id', 'anuncio_id']);
         });
@@ -19,6 +19,6 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::dropIfExists('favorites');
+        Schema::dropIfExists('j2_favorites');
     }
 };

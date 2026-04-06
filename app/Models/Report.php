@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Report extends Model
 {
+    protected $table = 'j2_reports';
+
     protected $fillable = [
         'user_id',
         'anuncio_id',
